@@ -57,6 +57,77 @@ neofetch
 
 ---
 
+## Programas Extras Utilizados
+Além da personalização do i3wm, utilizei alguns utilitários para enriquecer a experiência no terminal:
+
+### Locomotiva SL
+Uma animação divertida de um trem rodando no terminal.
+```sh
+sudo apt install sl
+```
+Para rodar em loop:
+```sh
+while true; do sl; done
+```
+
+### Relógio TTY
+Um relógio digital minimalista para o terminal.
+```sh
+sudo apt install tty-clock
+```
+Para executá-lo:
+```sh
+tty-clock -s -c
+```
+
+### CMatrix
+Efeito de "chuva" inspirado no filme Matrix.
+```sh
+sudo apt install cmatrix
+```
+Para rodar:
+```sh
+cmatrix
+```
+
+### Ranger
+Gerenciador de arquivos no terminal com navegação estilo Vim.
+```sh
+sudo apt install ranger
+```
+Para iniciar:
+```sh
+ranger
+```
+
+### Cava
+Visualizador de espectro de áudio para terminal.
+```sh
+sudo apt install cava
+```
+Para rodar:
+```sh
+cava
+```
+
+---
+
+## Como Personalizar o Wallpaper no i3wm
+Para definir um papel de parede no i3wm, utilize o **feh**:
+```sh
+sudo apt install feh
+```
+Depois, defina a imagem desejada como wallpaper:
+```sh
+feh --bg-scale /caminho/para/imagem.jpg
+```
+Para garantir que o papel de parede seja aplicado ao iniciar o i3, adicione esta linha ao arquivo de configuração do i3:
+```sh
+exec --no-startup-id feh --bg-scale /caminho/para/imagem.jpg
+```
+
+---
+
 ## Como Instalar e Usar as Configurações
 Caso queira utilizar estas configurações em seu ambiente, copie os arquivos para os diretórios correspondentes e reinicie o i3:
 ```sh
