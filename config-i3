@@ -1,0 +1,235 @@
+
+# Este arquivo foi gerado automaticamente pelo i3-config-wizard(1).
+# Ele não será sobrescrito, então edite-o como preferir.
+#
+# Caso você mude o layout do teclado, exclua
+# este arquivo e execute novamente o i3-config-wizard(1).
+#
+
+# Arquivo de configuração do i3 (v4)
+#
+# Consulte https://i3wm.org/docs/userguide.html para uma referência completa!
+
+set $mod Mod4
+
+# Fonte para títulos de janela. Também será usada pela barra, a menos que uma fonte diferente
+# seja especificada no bloco bar {} abaixo.
+font pango:monospace 8
+
+# Esta fonte é amplamente instalada, fornece muitos glifos Unicode, renderiza
+# texto da direita para a esquerda e é escalável em telas retina/hidpi (graças ao pango).
+#font pango:DejaVu Sans Mono 8
+
+# Inicia arquivos .desktop do XDG autostart usando dex. Consulte também
+# https://wiki.archlinux.org/index.php/XDG_Autostart
+exec --no-startup-id dex --autostart --environment i3
+
+# A combinação de xss-lock, nm-applet e pactl é uma escolha popular, então
+# eles estão incluídos aqui como exemplo. Modifique como preferir.
+
+# O xss-lock pega um bloqueio de suspensão logind e usará o i3lock para bloquear a
+# tela antes da suspensão. Use loginctl lock-session para bloquear sua tela.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# O NetworkManager é a forma mais popular de gerenciar redes sem fio no Linux,
+# e o nm-applet é uma interface de bandeja do sistema independente do ambiente de desktop.
+exec --no-startup-id nm-applet
+
+# Use pactl para ajustar o volume no PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Use Mouse+$mod para arrastar janelas flutuantes para a posição desejada
+floating_modifier $mod
+
+# Inicie um terminal
+bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+n exec nautilus
+#i3-sensible-terminal+++++++++++++++++++++++++++++++++
+
+# Feche a janela focada
+bindsym $mod+q kill
+
+# Inicie o dmenu (um iniciador de programas)
+bindsym $mod+d exec dmenu_run
+ 
+# Uma substituição mais moderna para o dmenu é o rofi:
+# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+# Também existe o i3-dmenu-desktop, que só exibe aplicativos que possuem um arquivo .desktop.
+# É um wrapper em torno do dmenu, então você precisa dele instalado.
+# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
+
+# Mude o foco
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+ccedilla focus right
+
+# Alternativamente, você pode usar as teclas de seta:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Mova a janela focada
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+ccedilla move right
+
+# Alternativamente, você pode usar as teclas de seta:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Divida em orientação horizontal
+bindsym $mod+h split h
+
+# Divida em orientação vertical
+bindsym $mod+v split v
+
+# Entre no modo de tela cheia para o contêiner focado
+bindsym $mod+f fullscreen toggle
+
+# Alterar o layout do contêiner (empilhado, tabulado, alternar divisão)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Alternar entre janelas flutuantes e tiling
+bindsym $mod+Shift+space floating toggle
+
+# Alterar o foco entre janelas tiling/flutuantes
+bindsym $mod+space focus mode_toggle
+
+# Focar no contêiner pai
+bindsym $mod+a focus parent
+
+# Focar no contêiner filho
+#bindsym $mod+d focus child
+
+# Defina nomes para áreas de trabalho padrão para as quais configuramos atalhos posteriormente.
+# Usamos variáveis para evitar repetir os nomes em vários lugares.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Alternar para a área de trabalho
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Mova o contêiner focado para a área de trabalho
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+#bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Recarregar o arquivo de configuração
+bindsym $mod+Shift+c reload
+# Reinicie o i3 no lugar (preserva seu layout/sessão, pode ser usado para atualizar o i3)
+bindsym $mod+Shift+r restart
+# Saia do i3 (encerra sua sessão X)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Você pressionou o atalho para sair. Você realmente deseja sair do i3? Isso encerrará sua sessão X.' -B 'Sim, sair do i3' 'i3-msg exit'"
+
+# Redimensionar janela (você também pode usar o mouse para isso)
+mode "resize" {
+    # Estas associações são ativadas assim que você entra no modo de redimensionamento
+
+    # Pressione as teclas para redimensionar a largura e altura
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
+
+    # Mesmas associações, mas com as teclas de seta
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    # Para voltar ao modo normal: Enter, Escape ou $mod+r
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+
+
+exec --no-startup-id xrandr --output eDP-1 --primary --auto --output HDMI-A-0 --right-of eDP-1 --auto
+
+
+# Workspaces no monitor principal (eDP-1)
+workspace 1 output eDP-1
+workspace 2 output eDP-1
+workspace 3 output eDP-1
+
+# Workspaces no monitor secundário (HDMI-1)
+workspace 4 output HDMI-A-0
+workspace 5 output HDMI-A-0
+workspace 6 output HDMI-A-0
+# Alterna entre monitores 
+bindsym $mod+o focus output next
+
+exec --no-startup-id xrandr --output eDP-1 --primary --auto --output HDMI-A-0 --right-of eDP-1 --auto
+
+
+
+# Define o tamanho dos gaps
+gaps inner 15          # Espaçamento interno entre janelas
+gaps outer 10          # Espaçamento externo (entre a janela e a borda da tela)
+
+# Ajustar os gaps com atalhos de teclado (opcional)
+# Aumentar gaps
+bindsym $mod+Shift+equal gaps inner all plus 5; gaps outer all plus 5
+
+# Diminuir gaps
+bindsym $mod+Shift+minus gaps inner all minus 5; gaps outer all minus 5
+
+# Resetar gaps para valores padrão
+bindsym $mod+Shift+0 gaps inner all set 10; gaps outer all set 15
+
+exec --no-startup-id barrier --start
+#exec --no-startup-id barrier --client 192.168.10.68
+
+bar {
+    height 35  # Ajuste o valor conforme preferir
+    status_command i3blocks
+    colors {
+        background #663399
+        statusline #ffffff
+        separator #424153
+    }
+
+}
+
+#wallpaper 
+exec --no-startup-id feh --bg-scale ~/Downloads/wallhaven-d6y12l_1920x1080.png
